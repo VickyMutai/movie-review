@@ -3,6 +3,7 @@ from config import config_options
 from flask_bootstrap import Bootstrap
 
 bootstrap = Bootstrap()
+db = SQLAlchemy()
 
 def create_app(config_name):
     # Initializing application
