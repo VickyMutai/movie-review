@@ -21,6 +21,9 @@ def create_app(config_name):
     #creating the app configurations
     app.config.from_object(config_options[config_name])
 
+    #configure UploadSet
+    configure_uploads(app,photos)
+
     #registering the blueprint
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
