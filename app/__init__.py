@@ -7,6 +7,11 @@ from flask_login import LoginManager
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
+
+
 def create_app(config_name):
     # Initializing application
     app = Flask(__name__)
@@ -24,14 +29,11 @@ def create_app(config_name):
     #initializing Flask Extensions
     bootstrap.init_app(app)
     db.init_app(app)
+    login_manager.init_app(app)
 
     #setting config
     from .request import configure_request
     configure_request(app)
-
-    login_manager = LoginManager()
-    login_manager.session_protection = 'strong'
-    login_manager.login_view = 'auth.login'
 
     #will add the views and forms
     return app
