@@ -7,7 +7,7 @@ from flask_uploads import UploadSet,configure_uploads,IMAGES
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
-photos = UploadSet('photos',IMAGE)
+photos = UploadSet('photos',IMAGES)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
