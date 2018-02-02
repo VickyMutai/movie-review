@@ -58,7 +58,7 @@ class Movie:
         self.vote_count = vote_count
 
 class Review(db.Model):
-    all_reviews = []
+    
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer,primary_key = True)
@@ -69,11 +69,13 @@ class Review(db.Model):
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
-    def __init__(self,movie_id,title,imageurl,review):
+    all_reviews = []
+    def __init__(self,movie_id,movie_title,image_path,movie_review,user):
         self.movie_id = movie_id
-        self.title = title
-        self.imageurl = imageurl
-        self.review = review
+        self.movie_title = movie_title
+        self.image_path = image_path
+        self.movie_review = movie_review
+        self.user = user
 
     def save_review(self):
         db.session.add(self)

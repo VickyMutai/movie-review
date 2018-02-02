@@ -1,16 +1,18 @@
 import unittest
+from flask_login import current_user
 from app.models import Review,User
 from app import db
  
 class TestReview(unittest.TestCase):
 
    def setUp(self):
-       self.user_Vicky = User(username = 'Vicky',password='potato',email = 'vicky@mail.com')
+       self.user_Vicky = User(username = 'Vicky',password='potato',email = 'test123@gmail.com')
        self.new_review = Review(movie_id=12345,movie_title='Review for movies',image_path="https://image.tmdb.org/t/p/w500/jdjdjdjn",movie_review='This movie is the best thing since sliced bread',user = self.user_Vicky )
 
    def tearDown(self):
        Review.query.delete()
-       Review.clear_reviews()
+       User.query.delete()
+     
 
    def test_instance(self):
        self.assertTrue(isinstance(self.new_review,Review))
@@ -35,5 +37,3 @@ class TestReview(unittest.TestCase):
        got_reviews = Review.get_reviews(12345)
        self.assertTrue(len(got_reviews) == 1)
 
-if __name__ == '__main__':
-    unittest.main()

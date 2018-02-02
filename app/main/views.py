@@ -55,11 +55,11 @@ def new_review(id):
     movie = get_movie(id)
 
     if form.validate_on_submit():
-        title = form.title.data
-        review = form.review.data
+        movie_title = form.movie_title.data
+        movie_review = form.movie_review.data
 
         #Updated review instance
-        new_review = Review(movie_id=movie.id, movie_title=title,image_path=movie.poster,movie_review=review, user = current_user)
+        new_review = Review(movie_id=movie.id, movie_title=movie_title,image_path=movie.poster,movie_review=movie_review, user = current_user)
         
         #save review method
         new_review.save_review()
