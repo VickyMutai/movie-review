@@ -57,7 +57,11 @@ def new_review(id):
     if form.validate_on_submit():
         title = form.title.data
         review = form.review.data
-        new_review = Review(movie.id,title,movie.poster,review)
+
+        #Updated review instance
+        new_review = Review(movie_id=movie.id, movie_title=title,image_path=movie.poster,movie_review=review, user = current_user)
+        
+        #save review method
         new_review.save_review()
         return redirect(url_for('.movie',id=movie.id))
 
