@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..request import get_movies,get_movie,search_movie
-from ..models import Review, User
+from ..models import Review, User, PhotoProfile
 from .forms import ReviewForm, UpdateProfile
-from flask_login import login_required
+from flask_login import login_required,current_user
 from .. import db,photos
 import markdown2
 
@@ -68,6 +68,14 @@ def new_review(id):
 
     title = f'{movie.title} review'
     return render_template('new_review.html',title = title, review_form = form, movie = movie)
+
+@main.route('/reviews/<int:id>')
+def movie_reviews(id):
+    movie = get_movie(id)
+
+    reviews = Review.get_reviews(id)
+    title = f'All reviews for {movie.title}'
+    return render_template('movie_reviews.html',title = title,reviews=reviews)
 
 @main.route('/review/<int:id>')
 def single_review(id):
