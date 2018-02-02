@@ -18,6 +18,10 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     SENDER_EMAIL = 'vicky.mutai96@gmail.com'
 
+    #simple mde configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True 
+
 class ProdConfig(Config):
     '''
     Product Configuration child class
