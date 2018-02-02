@@ -4,6 +4,7 @@ from ..request import get_movies,get_movie,search_movie
 from ..models import Review
 from .forms import ReviewForm, UpdateProfile
 from flask_login import login_required
+from .. import db,photos
 
 #views
 @main.route('/')
@@ -89,3 +90,15 @@ def update_profile(uname):
 
         return redirect(url_for('.profile',uname=user.username))
     return render_template('profile/update.html', form=form)
+
+@main.route('/user/<uname>/update/pic' methods=['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).fist()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+
+    return redirect(url_for('main.profile',uname=uname))
